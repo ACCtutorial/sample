@@ -1,4 +1,10 @@
-FROM python:3
+FROM ubuntu:latest
+
+MAINTAINER Balaji Dhakshinamoorthy <balajid@dal.ca>
+
+#install deps for python
+RUN apt-get -yqq update
+RUN apt-get -yqq install python3-pip python3-dev
 
 # set a directory for the app
 WORKDIR /usr/src/app
@@ -6,7 +12,7 @@ WORKDIR /usr/src/app
 COPY requirements.txt .
 
 # install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
@@ -14,4 +20,4 @@ COPY . .
 EXPOSE 5000
 
 # run the command
-CMD ["python", "./app.py"]
+CMD ["python3", "./app.py"]
